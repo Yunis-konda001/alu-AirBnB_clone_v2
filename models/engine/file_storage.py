@@ -55,10 +55,20 @@ class FileStorage:
             else:
                 print(f"Class {class_name} not found in class_map")
 
+    # def delete(self, obj=None):
+    #     """Deletes obj from __objects if it exists."""
+    #     if obj is not None:
+    #         key = f"{obj.__class__.__name__}.{obj.id}"
+    #         if key in self.__objects:
+    #             del self.__objects[key]
+    #             self.save()
+
     def delete(self, obj=None):
-        """Deletes obj from __objects if it exists."""
+        """deletes obj from __objects"""
         if obj is not None:
-            key = f"{obj.__class__.__name__}.{obj.id}"
-            if key in self.__objects:
-                del self.__objects[key]
+            key = obj.__class__.__name__ + '.' + obj.id
+            if key in FileStorage.__objects:
+                del FileStorage.__objects[key]
                 self.save()
+        else:
+            pass
