@@ -1,24 +1,20 @@
 #!/usr/bin/python3
-from fabric.api import local
+"""This generates .tgz archive from teh web_static"""
+
 from datetime import datetime
+from fabric.api import *
 
 
 def do_pack():
     """
-    Generates a .tgz archive from the contents of the web_static folder.
-
-    The archive is stored in the versions directory and is named based on
-    the current timestamp.
-
-    Returns:
-        str: The path to the created archive on success.
-        None: If the archive creation fails.
+    archive file making
     """
-    try:
-        time_str = datetime.now().strftime("%Y%m%d%H%M%S")
-        archive_name = "web_static_{}.tgz".format(time_str)
-        local("mkdir -p versions")
-        local("tar -cvzf versions/{} web_static".format(archive_name))
-        return "versions/{}".format(archive_name)
-    except:
+
+    tme = datetime.now()
+    arch = 'web_static_' + tme.strftime("%Y%m%d%H%M%S") + '.' + 'tgz'
+    local('mkdir -p versions')
+    make = local('tar -cvzf versions/{} web_static'.format(arch))
+    if make is not None:
+        return arch
+    else:
         return None
