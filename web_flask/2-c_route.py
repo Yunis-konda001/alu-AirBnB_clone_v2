@@ -4,10 +4,12 @@ from flask import Flask
 
 app = Flask(__name__)
 
+
 @app.route("/", strict_slashes=False)
 def hello_hbnb():
     """Display HBNB"""
     return "HBNB"
+
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_is_fun(text):
